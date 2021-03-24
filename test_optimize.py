@@ -77,7 +77,7 @@ def optimize():
     scene_mesh, cur_scene_verts, s_grid_min_batch, s_grid_max_batch, s_sdf_batch = read_mesh_sdf(args.dataset_path,
                                                                                                  args.dataset,
                                                                                                  args.scene_name)
-    save_path = '{}/{}'.format(args.save_path, args.dataset, args.scene_name)
+    save_path = '{}/{}/{}'.format(args.save_path, args.dataset, args.scene_name)
     if not os.path.exists(save_path):
         os.makedirs(save_path)
 
@@ -105,7 +105,7 @@ def optimize():
 
     ####################### calculate scene bps representation ##################
     rot_angle, scene_min_x, scene_max_x, scene_min_y, scene_max_y = define_scene_boundary(args.dataset, args.scene_name)
-    
+
     scene_verts_crop_local_list, scene_verts_local_list, = [], []
     shift_list = []
     rot_angle_list_1, rot_angle_list_2 = [], []
@@ -409,7 +409,6 @@ def optimize():
 
         body_params_opt_list_s2 = np.asarray(body_params_opt_list_s2)
         np.save('{}/body_params_opt_list_s2.npy'.format(save_path), body_params_opt_list_s2)
-
 
 
 

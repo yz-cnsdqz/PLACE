@@ -237,15 +237,10 @@ def gen_body_mesh(body_params, body_pose_joint, smplx_model):
     # input: body_params/body_pose_joint: tensor batch
     # output: body_verts: np array batch
     body_params_dict = body_params_encapsulate_batch(body_params)
-    body_param_ = {}
-    for key in body_params_dict.keys():
-        if key in ['body_pose_vp']:
-            continue
-        else:
-            body_param_[key] = body_params_dict[key]
-    smplx_output = smplx_model(return_verts=True, body_pose=body_pose_joint, **body_param_)  # generated human body mesh
+    body_params_dict['body_pose'] = body_pose_joint
+    smplx_output = smplx_model(return_verts=True, **body_params_dict)  # generated human body mesh
     body_verts = smplx_output.vertices  # [bs, n_body_vert, 3]
-    return body_verts
+    return body_verts, body_params_dict
 
 
 def update_globalRT_for_smplx(body_params, smplx_model, trans_to_target_origin, delta_T=None):

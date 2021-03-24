@@ -15,7 +15,7 @@ def read_mesh_sdf(dataset_path, dataset, scene_name):
         cur_scene_verts = np.asarray(scene.vertices)
 
         ## read scene sdf
-        scene_sdf_path = os.path.join(dataset_path, 'sdf')
+        scene_sdf_path = os.path.join(dataset_path, 'scenes_sdf')
         with open(os.path.join(scene_sdf_path, scene_name + '.json')) as f:
             sdf_data = json.load(f)
             grid_min = np.array(sdf_data['min'])
@@ -177,5 +177,5 @@ def define_scene_boundary(dataset, scene_name):
             scene_max_x = 8.0
             scene_min_y = -1.0
             scene_max_y = 6.7
-    
+
     return rot_angle, scene_min_x, scene_max_x, scene_min_y, scene_max_y
